@@ -17,11 +17,11 @@ pipeline {
                 sh 'echo Preparing'
             }
         }
-        stage('Git Pulling') {
+       stage('Checkout from Git') {
             steps {
-                git branch: 'master', url: 'https://github.com/fleetman-k8s-ci/eks-terraform.git'
+                git credentialsId: 'GitHub', url: "https://github.com/fleetman-k8s-ci/eks-terraform.git"
             }
-        }
+      }
         stage('Init') {
             steps {
                 withAWS(credentials: 'aws-creds', region: 'us-east-1') {
